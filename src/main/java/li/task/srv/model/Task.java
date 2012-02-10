@@ -3,6 +3,8 @@
  */
 package li.task.srv.model;
 
+import java.io.Serializable;
+
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -10,7 +12,9 @@ import javax.xml.bind.annotation.XmlRootElement;
  *
  */
 @XmlRootElement
-public class Task {
+public class Task implements Serializable{
+	
+	private static final long serialVersionUID = 2240411649690612112L;
 	
 	private String name;
 

@@ -1,4 +1,4 @@
-package li.task.srv.resources;
+package li.task.srv.resource;
 
 import java.util.HashSet;
 import java.util.Set;

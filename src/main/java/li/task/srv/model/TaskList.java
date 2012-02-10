@@ -3,22 +3,27 @@
  */
 package li.task.srv.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 /**
  * @author seb
  *
  */
-public class TaskList {
+public class TaskList implements Serializable{
 	
-	private int id;
+	private static final long serialVersionUID = 6786660919869427134L;
+	
+	private String id = null;
 	private List<Task> tasks = new ArrayList<Task>();
 	
 	public TaskList() {
+		this.id = UUID.randomUUID().toString();
 	}
 	
-	public TaskList(int id) {
+	public TaskList(String id) {
 		this.id = id;
 	}
 
@@ -26,10 +31,10 @@ public class TaskList {
 		this.tasks.add(task);
 	}
 	
-	public int getId() {
+	public String getId() {
 		return id;
 	}
-	public void setId(int id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 
