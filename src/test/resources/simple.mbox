@@ -1,0 +1,20 @@
+From root@task.panter.ch Fri Feb 10 20:11:55 2012
+Return-path: <root@task.panter.ch>
+Envelope-to: jetty@task.panter.ch
+Delivery-date: Fri, 10 Feb 2012 20:11:55 +0100
+Received: from root by task with local (Exim 4.72)
+	(envelope-from <root@task.panter.ch>)
+	id 1Rvvsx-0007gS-Rs
+	for jetty@task.panter.ch; Fri, 10 Feb 2012 20:11:55 +0100
+Message-Id: <E1Rvvsx-0007gS-Rs@task>
+Date: Fri, 10 Feb 2012 20:11:55 +0100
+To: jetty@task.panter.ch
+Subject: Test Mail
+User-Agent: Heirloom mailx 12.4 7/29/08
+MIME-Version: 1.0
+Content-Type: text/plain; charset=us-ascii
+Content-Transfer-Encoding: 7bit
+From: root <root@task.panter.ch>
+
+Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+

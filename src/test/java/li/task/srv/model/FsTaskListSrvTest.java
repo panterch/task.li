@@ -11,7 +11,7 @@ import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
 import static org.hamcrest.Matchers.*;
 
-public class TaskListSrvTest {
+public class FsTaskListSrvTest {
 	
 	@Rule
     public TemporaryFolder folder = new TemporaryFolder();
