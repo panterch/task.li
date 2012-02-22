@@ -1,5 +1,6 @@
 package li.task.srv.resource;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.*;
 
 import javax.ws.rs.core.MediaType;
@@ -8,9 +9,9 @@ import li.task.srv.model.InMemoryTaskListSrv;
 import li.task.srv.model.Task;
 import li.task.srv.model.TaskList;
 
+import org.codehaus.jettison.json.JSONObject;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
 import org.springframework.web.context.ContextLoaderListener;
 
 import com.riffpie.common.testing.SpringAwareGrizzlyTestContainerFactory;
@@ -74,6 +75,19 @@ public class TaskListResourceIntegrationTest extends JerseyTest {
 		String responseMsg = webResource.path("tasklists/test-task")
 				.accept(MediaType.APPLICATION_JSON_TYPE).get(String.class);
 		assertContains("swim", responseMsg);
+	}
+	
+	@Test
+	public void shouldCreateTasklistByJSON() throws Exception {
+    	JSONObject json = new JSONObject("{\"id\":\"test-task\",\"tasks\":[{\"name\":\"Learn to swim\"}]}");
+    	WebResource webResource = resource();
+    	String response = webResource.path("tasklists").
+    		type("application/json").
+    		post(String.class, json);
+    	assertEquals("test-task", response);
+    	assertTrue(!this.inMemoryTaskListSrv.getStore().isEmpty());
+    	TaskList taskList = this.inMemoryTaskListSrv.getTaskList("test-task");
+    	assertEquals("Learn to swim", taskList.getTasks().get(0).getName());
 	}
 
 	@Test
