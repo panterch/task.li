@@ -42,7 +42,7 @@ public class TaskListResourceIntegrationTest extends JerseyTest {
 				.contextListenerClass(ContextLoaderListener.class).build());
 	}
 
-	/*
+	/**
 	 * the integration test uses its own server. it is important that server and
 	 * this resource use the same application context. this is checked here by
 	 * comparing the object hash printed by the configuration request.
