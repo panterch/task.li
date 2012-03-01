@@ -8,6 +8,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+import javax.mail.Message;
+
+import org.springframework.test.context.transaction.TransactionConfiguration;
+
 /**
  * @author seb
  *
@@ -18,6 +22,8 @@ public class TaskList implements Serializable{
 	
 	private String id = null;
 	private List<Task> tasks = new ArrayList<Task>();
+	
+	private transient Message message;
 	
 	public TaskList() {
 		this.id = UUID.randomUUID().toString();
@@ -36,6 +42,14 @@ public class TaskList implements Serializable{
 	}
 	public void setId(String id) {
 		this.id = id;
+	}
+
+	public Message getMessage() {
+		return message;
+	}
+
+	public void setMessage(Message message) {
+		this.message = message;
 	}
 
 	public List<Task> getTasks() {

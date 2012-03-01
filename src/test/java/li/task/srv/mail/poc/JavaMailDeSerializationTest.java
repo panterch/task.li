@@ -1,7 +1,7 @@
 /**
  * 
  */
-package li.task.srv.mail;
+package li.task.srv.mail.poc;
 
 import static org.hamcrest.Matchers.startsWith;
 import static org.junit.Assert.assertThat;

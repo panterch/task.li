@@ -1,4 +1,4 @@
-package li.task.srv.mail;
+package li.task.srv.mail.poc;
 
 import static org.hamcrest.Matchers.containsString;
 import static org.junit.Assert.assertEquals;
@@ -52,13 +52,21 @@ public class SimpleMaildirTest {
 	}
 
 	@Test
-	public void shouldReadWithJavamaildir() throws Exception {
+	public void shouldReadSubjectWithJavamaildir() throws Exception {
 		Folder inbox = store.getFolder("inbox");
 		inbox.open(Folder.READ_WRITE);
 		Message m = inbox.getMessage(1);
 		assertEquals("Test Mail", m.getSubject());
 	}
 
+	@Test
+	public void shouldReadContentWithJavamaildir() throws Exception {
+		Folder inbox = store.getFolder("inbox");
+		inbox.open(Folder.READ_WRITE);
+		Message m = inbox.getMessage(1);
+		assertThat(m.getContent().toString(), containsString("Hello, world"));
+	}
+	
 	@Test
 	public void shouldSetFlags() throws Exception {
 		Folder inbox = store.getFolder("inbox");
@@ -79,8 +87,6 @@ public class SimpleMaildirTest {
 		Folder inbox = store.getFolder("inbox");
 		inbox.open(Folder.READ_WRITE);
 		Message m = inbox.getMessage(1);
-		
-		m.writeTo(System.out);
 
 		m.setFlag(Flags.Flag.DELETED, true);
 		

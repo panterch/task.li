@@ -12,6 +12,18 @@
 
 	<context:component-scan base-package="li.task.srv.resource" />
 
-	<bean id="taskListSrv" class="li.task.srv.model.FsTaskListSrv" />
+	<bean id="taskListSrv" class="li.task.srv.model.FsTaskListSrv">
+		<property name="dir" value="/usr/share/jetty/store"/>
+	</bean>
+	
+	<bean id="messageProcessor" class="li.task.srv.mail.DefaultMessageProcessor">
+		<property name="taskListSrv" ref="taskListSrv" />
+		<property name="maildirScanner">
+		    <bean class="li.task.srv.mail.MaildirScanner">
+      			<property name="maildir" value="/usr/share/jetty/Maildir"/>
+    		</bean>
+		</property>
+	</bean>
+
 
 </beans>
