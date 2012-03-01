@@ -1,0 +1,5 @@
+protocol=maildir; type=store; class=net.ukrpost.storage.maildir.MaildirStore; vendor=Priocom Corp.;
+# set the javamail default provider to a mock implementation for SMTP only.
+#
+protocol=smtp; type=transport; class=li.task.srv.mail.MockTransport; vendor=Acme Corporation;
+

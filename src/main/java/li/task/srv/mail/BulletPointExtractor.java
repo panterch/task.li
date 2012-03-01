@@ -16,30 +16,40 @@ import li.task.srv.model.TaskList;
 
 /**
  * @author seb
- *
+ * 
  */
-public class BulletPointExtractor implements MessageProcessor {
-	
+public class BulletPointExtractor extends BaseMessageProcessor implements
+		MessageProcessor {
+
 	final Logger logger = LoggerFactory.getLogger(BulletPointExtractor.class);
 
-	public TaskList processMessage(TaskList taskList, Message msg) throws Exception {	
+	@Override
+	protected TaskList processMessage(TaskList taskList, Message msg)
+			throws Exception {
 		String content = msg.getContent().toString();
-		logger.info("Processing message content:\n"+content);
+		logger.info("Processing message content:\n" + content);
 		BufferedReader r = new BufferedReader(new StringReader(content));
-		
+
 		String line;
 		while ((line = r.readLine()) != null) {
-		  line = line.trim();
-		  if (line.startsWith("*") || line.startsWith("-")) {
-			  logger.info("Detected taks: "+line);
-			  Task t = new Task();
-			  t.setName(line);
-			  taskList.addTask(t);
-		  }
+			addTask(taskList, line);
 		}
 
 		r.close();
 		return taskList;
+	}
+
+	protected void addTask(TaskList taskList, String line) {
+		line = line.trim();
+		if (line.startsWith("*") || line.startsWith("-")) {
+			line = line.substring(1); // remove bullet point
+			line = line.trim();
+			logger.info("Detected taks: " + line);
+			Task t = new Task();
+			t.setName(line);
+			taskList.addTask(t);
+		}
+
 	}
 
 }

@@ -7,6 +7,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 import li.task.srv.mail.MessageProcessor;
 import li.task.srv.model.TaskList;
@@ -22,7 +23,7 @@ import com.sun.jersey.api.NotFoundException;
 public class TaskListResource {
 	
 	@Autowired TaskListSrv taskListSrv;
-	@Autowired MessageProcessor messageProcessor;
+	@Autowired MessageProcessor incomingMessageProcessor;
 
     @GET
     @Path("tasklists/{id}")
@@ -55,8 +56,8 @@ public class TaskListResource {
     @Path("_process")
     @Produces("text/plain")
     public String processMessage() throws Exception {
-    	messageProcessor.processMessage(null, null);
-        return "OK";
+    	TaskList tasklist = incomingMessageProcessor.processMessage(null);
+        return "tasklists/" + tasklist.getId();
     }
 
 }

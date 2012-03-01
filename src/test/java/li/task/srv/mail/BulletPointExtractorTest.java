@@ -28,7 +28,14 @@ import org.springframework.core.io.ClassPathResource;
 public class BulletPointExtractorTest {
 	
 	private Session session = Session.getInstance(new Properties());
-	private BulletPointExtractor instance = new BulletPointExtractor();
+	private BulletPointExtractor instance;
+	private TaskList taskList;
+	
+	@Before
+	public void setup() {
+		instance = new BulletPointExtractor();
+		taskList = new TaskList();
+	}
 
 
 	@Test
@@ -36,6 +43,12 @@ public class BulletPointExtractorTest {
 		TaskList taskList = tasklistFromFixture("tasklist.RFC822");
 		taskList = instance.processMessage(taskList, taskList.getMessage());
 		assertEquals(3, taskList.getTasks().size());
+	}
+	
+	@Test
+	public void shouldExtractTaskWithAsterisk() throws Exception {
+		instance.addTask(taskList, " * Go shopping");
+		assertEquals("Go shopping", taskList.getTasks().get(0).getName());
 	}
 	
 	private TaskList tasklistFromFixture(String name) throws Exception {

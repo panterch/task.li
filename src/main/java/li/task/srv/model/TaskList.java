@@ -21,6 +21,9 @@ public class TaskList implements Serializable{
 	private static final long serialVersionUID = 6786660919869427134L;
 	
 	private String id = null;
+	private String name;
+	private String initiator;
+	private List<String> collaborators = new ArrayList<String>();
 	private List<Task> tasks = new ArrayList<Task>();
 	
 	private transient Message message;
@@ -58,6 +61,34 @@ public class TaskList implements Serializable{
 
 	public void setTasks(List<Task> tasks) {
 		this.tasks = tasks;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getInitiator() {
+		return initiator;
+	}
+
+	public void setInitiator(String initiator) {
+		this.initiator = initiator;
+	}
+
+	public List<String> getCollaborators() {
+		return collaborators;
+	}
+
+	public void setCollaborators(List<String> collaborators) {
+		this.collaborators = collaborators;
+	}
+	
+	public void addCollaborator(String collaborator) {
+		this.collaborators.add(collaborator);
 	}
 
 }

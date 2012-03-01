@@ -21,7 +21,7 @@ import li.task.srv.model.TaskList;
  * @author seb
  *
  */
-public class MaildirScanner implements MessageProcessor {
+public class MaildirScanner extends BaseMessageProcessor implements MessageProcessor {
 	
 	protected Session session = Session.getInstance(new Properties());
 	protected File maildir; 
@@ -34,7 +34,8 @@ public class MaildirScanner implements MessageProcessor {
 		this.maildir = maildir;
 	}
 	
-	public TaskList processMessage(TaskList taskList, Message msg) throws Exception {
+	@Override
+	protected TaskList processMessage(TaskList taskList, Message msg) throws Exception {	
 		if (!maildir.isDirectory()) {
 			throw new IllegalArgumentException("must submit a directory: "+maildir.getAbsolutePath());
 		}
@@ -47,7 +48,7 @@ public class MaildirScanner implements MessageProcessor {
 		
 		Folder inbox = store.getFolder("inbox");
 		inbox.open(Folder.READ_WRITE);
-		if (!inbox.hasNewMessages()) {
+		if (1 > inbox.getMessageCount()) {
 			throw new Exception("there are no new messages to process in inbox");
 		}
 		msg = inbox.getMessage(1);
@@ -61,6 +62,7 @@ public class MaildirScanner implements MessageProcessor {
 		
 		taskList = new TaskList();
 		taskList.setMessage(msg);
+		taskList.setName(msg.getSubject());
 		return taskList;
 	}
 

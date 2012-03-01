@@ -14,8 +14,7 @@
 	
 	<bean id="taskListSrv" class="li.task.srv.model.InMemoryTaskListSrv" />
 	
-	<bean id="messageProcessor" class="li.task.srv.mail.DefaultMessageProcessor">
-		<property name="taskListSrv" ref="taskListSrv" />
+	<bean id="messageProcessor" class="li.task.srv.mail.DelegatingMessageProcessor">
 	</bean>
 
 </beans>
