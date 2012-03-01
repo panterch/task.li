@@ -1,4 +1,4 @@
-Send a containing text of the following to task@task.li:
+Send plain text email containing tasks to task@task.li:
 
 Subject: My tasks today
 
